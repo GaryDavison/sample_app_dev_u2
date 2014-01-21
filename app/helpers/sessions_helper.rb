@@ -5,4 +5,9 @@ module SessionsHelper
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
   end #sign_in
+
+  def current_user=(user)
+    @current_user = user
+  end #current_user
+
 end
