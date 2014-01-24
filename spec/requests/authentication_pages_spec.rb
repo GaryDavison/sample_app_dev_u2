@@ -18,11 +18,11 @@ describe "Authentication" do
       before { click_button "Sign in" }
 
       it { should have_title('Sign in') }
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_error_message('Invalid email/password combination') }
 
       describe "after visiting another page" do
         before { click_link "Home" }
-        it { should_not have_selector('div.alert.alert-error') }
+        it { should_not have_error_message('') }
       end
 
 
@@ -31,12 +31,13 @@ describe "Authentication" do
 
 
     describe "with valid information" do
-      let(:user) { FactoryGirl.create(:user) }
-      before do
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
-      end  #before
+      let(:user) { create_user(:user) }
+      before { valid_signin(user)}
+#      before do
+#        fill_in "Email",    with: user.email.upcase
+#        fill_in "Password", with: user.password
+#        click_button "Sign in"
+#      end  #before
 
       it { should have_title(user.name) }
       it { should have_link('Profile',     href: user_path(user)) }
@@ -66,3 +67,4 @@ end #authentication
 #    end
 #  end
 #end
+
