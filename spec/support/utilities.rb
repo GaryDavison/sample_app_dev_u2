@@ -1,6 +1,11 @@
 include ApplicationHelper
 
 
+def create_user(inStr)
+      FactoryGirl.create(inStr)
+end
+
+
 def valid_signin(user)
   fill_in "Email",    with: user.email
   fill_in "Password", with: user.password
