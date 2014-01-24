@@ -40,6 +40,7 @@ describe "Authentication" do
 #      end  #before
 
       it { should have_title(user.name) }
+      it { should have_link('Users',       href: users_path) }
       it { should have_link('Profile',     href: user_path(user)) }
       it { should have_link('Settings',    href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
@@ -72,7 +73,14 @@ describe "Authentication" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
         end # submit to update
+
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_title('Sign in') }
+        end  #visiting the user index
+
       end #users controller
+
     end  #non-signed in users
 
 

@@ -139,5 +139,27 @@ describe "User pages" do
 
   end #edit page
 
+#index page
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      visit users_path
+    end #before
+
+    it { should have_title('All users') }
+    it { should have_content('All users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        expect(page).to have_selector('li', text: user.name)
+      end  #each loop
+    end  #should list each user
+  end  #describe index
+
+
+
+
 end # user pages
 
