@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-  end
+  end #show
 
   def new
     @user = User.new
-  end
+  end  #new
 
  def create
     @user = User.new(user_params)    # Not the final implementation!
@@ -18,11 +18,27 @@ class UsersController < ApplicationController
     end  # if @user.save
   end  #create
 
+
+  def edit
+    @user = User.find(params[:id])
+  end  #edit
+
+
+def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # Handle a successful update.
+    else
+      render 'edit'
+    end  #if else
+  end  #update
+
+
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
+    end #user_params
 
-end
+  end #private
