@@ -8,16 +8,20 @@ module SessionsHelper
 
   def current_user=(user)
     @current_user = user
-  end #current_user
+  end #current_user (params)
 
   def current_user
     remember_token = User.encrypt(cookies[:remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
-  end
+  end  #current user (no params)
+
+  def current_user?(user)
+    user == current_user
+  end #current user?
 
   def signed_in?
     !current_user.nil?
-  end
+  end #signed in
 
   def sign_out
     current_user.update_attribute(:remember_token,
