@@ -31,4 +31,15 @@ module SessionsHelper
   end  #sign_out
 
 
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end  #redirect back or
+
+  def store_location
+    session[:return_to] = request.url if request.get?
+  end  #store location
+
+
+
 end

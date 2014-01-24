@@ -46,7 +46,10 @@ class UsersController < ApplicationController
     end #user_params
 
     def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in." 
+      end # unless signed in
     end  #signed in user
 
     def correct_user
