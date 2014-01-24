@@ -182,6 +182,24 @@ describe "User pages" do
 
 
 
+#Admin
+  it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
+
+  it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end  #before
+
+    it { should be_admin }
+  end #with admin attrib set to true
+
+
+
 
 end # user pages
 
