@@ -23,7 +23,10 @@ describe "Authentication" do
       describe "after visiting another page" do
         before { click_link "Home" }
         it { should_not have_error_message('') }
-      end #visiting another page
+        it { should_not have_link('Profile') }
+        it { should_not have_link('Settings') }
+        it { should_not have_link('Sign out',    href: signout_path) }
+     end #visiting another page
 
 
     end #invalid information
