@@ -139,6 +139,23 @@ describe "Authentication" do
     end #non-admin-users
 
 
+    describe "for signed in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user, no_capybara: true }
+
+      describe "using a 'new' action" do
+        before { get new_user_path }
+        specify { response.should redirect_to(root_path) }
+      end #new
+
+      describe "using a 'create' action" do
+        before { post users_path(user) }
+        specify { response.should redirect_to(root_path) }
+      end #create
+    end #for signed in users
+
+
+
 
   end  #authorization
 
