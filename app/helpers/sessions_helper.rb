@@ -37,8 +37,18 @@ module SessionsHelper
   end  #redirect back or
 
   def store_location
-    session[:return_to] = request.url if request.get?
+    if request.get?
+      if session[:return_to].nil?
+        session[:return_to] = request.url
+      else
+        session[:return_to] = user_path(user)
+      end
+   end
   end  #store location
+
+#  def store_location
+#    session[:return_to] = request.url if request.get?
+#  end
 
 
 
